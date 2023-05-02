@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "49731790823",
+    "project_id": "a-video-chat-app-57b9e",
+    "storage_bucket": "a-video-chat-app-57b9e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:49731790823:android:6fdc4b9dd2752836917f42",
+        "android_client_info": {
+          "package_name": "com.example.avideochatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "49731790823-qaf9h64g1cppe2m379964mpe9ve41vlt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBU2X3eTa17QO18zOE_Of885adcRkuPHQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "49731790823-qaf9h64g1cppe2m379964mpe9ve41vlt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
