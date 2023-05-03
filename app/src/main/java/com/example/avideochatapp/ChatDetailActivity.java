@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.avideochatapp.Adapters.ChatAdapter;
 import com.example.avideochatapp.Models.MessageModel;
@@ -40,9 +41,17 @@ public class ChatDetailActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         final String senderId = auth.getUid();
+        String sUserName = null;
+        if(auth.getCurrentUser()!=null)
+        {
+            sUserName = auth.getCurrentUser().getDisplayName().toString();
+        }
+
         String recieveId = getIntent().getStringExtra("userId");
         String userName = getIntent().getStringExtra("userName");
         String profilePic = getIntent().getStringExtra("profilePic");
+        Toast.makeText(ChatDetailActivity.this, sUserName + " " + userName, Toast.LENGTH_SHORT).show();
+
 
         binding.userName.setText(userName);
         Picasso.get().load(profilePic).placeholder(R.drawable.avatar).into(binding.profileImage);
