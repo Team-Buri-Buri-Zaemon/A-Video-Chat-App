@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.94" />
+            app:layout_constraintGuide_percent="0.83" />
 
         <TextView
             android:id="@+id/senderText"
@@ -43,7 +43,7 @@
             android:minWidth="50dp"
 
 
-            android:text="ggggggggggggggggggggggggggggggggggggggggggggggggggggggg"
+            android:text="ggggggggg"
             app:layout_constraintBottom_toTopOf="@+id/senderTime"
             app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintStart_toStartOf="parent"

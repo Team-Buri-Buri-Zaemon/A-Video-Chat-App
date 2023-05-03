@@ -33,12 +33,7 @@ public class MainActivity extends AppCompatActivity {
         binding.viewPager.setAdapter(new FragmentsAdapter(getSupportFragmentManager()));
         binding.tablayout.setupWithViewPager(binding.viewPager);
 
-//        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_CONTACTS)
-//                == PackageManager.PERMISSION_GRANTED) {
-//            mobileArray = getAllContacts();
-//        } else {
-//            requestPermission();
-//        }
+
     }
 
 
@@ -60,6 +55,12 @@ public class MainActivity extends AppCompatActivity {
         else if(id == R.id.logout){
             auth.signOut();
             Intent intent = new Intent(MainActivity.this,SignInActivity.class);
+            startActivity(intent);
+        }
+        else if(id == R.id.groupChat)
+        {
+            Intent intent = new Intent(MainActivity.this,GroupChatActivity.class);
+
             startActivity(intent);
         }
         return true;
