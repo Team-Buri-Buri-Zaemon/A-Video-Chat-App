@@ -47,7 +47,7 @@ public class ChatDetailActivity extends AppCompatActivity {
             sUserName = auth.getCurrentUser().getDisplayName().toString();
         }
 
-        String recieveId = getIntent().getStringExtra("userId");
+        String receiverId = getIntent().getStringExtra("userId");
         String userName = getIntent().getStringExtra("userName");
         String profilePic = getIntent().getStringExtra("profilePic");
         Toast.makeText(ChatDetailActivity.this, sUserName + " " + userName, Toast.LENGTH_SHORT).show();
@@ -68,14 +68,22 @@ public class ChatDetailActivity extends AppCompatActivity {
             }
         });
 
+
+//        Toast.makeText(ChatDetailActivity.this, sUserName + " " + userName, Toast.LENGTH_SHORT).show();
+
+
+//        binding.userName.setText(userName);
+//        Picasso.get().load(profilePic).placeholder(R.drawable.avatar).into(binding.profileImage);
+//        Toast.makeText(ChatDetailActivity.this, receiverId + " &&& " + senderId, Toast.LENGTH_SHORT).show();
         binding.videoCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ChatDetailActivity.this,MainActivity.class);
-                //used to send extra data to next activity check usersAdapter
-//                intent.putExtra("userId",users.getUserId());
+                Intent intent = new Intent(ChatDetailActivity.this, videocall.class);
+//                used to send extra data to next activity check usersAdapter
+                intent.putExtra("userId",senderId);
 //                intent.putExtra("profilePic",users.getProfilepic());
-//                intent.putExtra("userName",users.getUserName());
+                intent.putExtra("receiverId", receiverId);
+
                 startActivity(intent);
             }
         });
@@ -96,8 +104,8 @@ public class ChatDetailActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         binding.chatRecyclarView.setLayoutManager(layoutManager);
 
-        final  String senderRoom = senderId + recieveId;
-        final String receiverRoom = recieveId + senderId;
+        final  String senderRoom = senderId + receiverId;
+        final String receiverRoom = receiverId + senderId;
 
         database.getReference().child("chats")
                         .child(senderRoom)
