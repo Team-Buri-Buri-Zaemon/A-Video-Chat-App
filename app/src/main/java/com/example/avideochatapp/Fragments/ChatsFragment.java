@@ -1,17 +1,24 @@
 package com.example.avideochatapp.Fragments;
 
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.example.avideochatapp.Adapters.UsersAdapter;
+
+import android.Manifest;
+
 import com.example.avideochatapp.Models.Users;
 import com.example.avideochatapp.R;
 import com.example.avideochatapp.databinding.FragmentChatsBinding;
@@ -34,8 +41,28 @@ public class ChatsFragment extends Fragment {
     FragmentChatsBinding binding;
     ArrayList<Users> list = new ArrayList<>();
     FirebaseDatabase database;
+    private static final int REQUEST_CODE_READ_CONTACTS = 1;
 
+    private boolean checkIfPhoneNumberIsInContacts(String phoneNumber) {
+        if (phoneNumber == null) {
+            return false;
+        }
 
+        // Remove any non-digit characters from the phone number
+        phoneNumber = phoneNumber.replaceAll("[^0-9]+", "");
+
+        // Check if the modified phone number matches any phone number in the contacts list
+        Cursor cursor = getContext().getContentResolver().query(
+                ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                null,
+                ContactsContract.CommonDataKinds.Phone.NUMBER + " LIKE ?",
+                new String[]{"%" + phoneNumber + "%"},
+                null
+        );
+        boolean result = cursor.getCount() > 0;
+        cursor.close();
+        return result;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,6 +76,15 @@ public class ChatsFragment extends Fragment {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.chatRecyclarView.setLayoutManager(layoutManager);
+        if (ContextCompat.checkSelfPermission(getContext(),
+                Manifest.permission.READ_CONTACTS)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Permission is not granted
+            // Ask for the permission
+            requestPermissions(new String[]{Manifest.permission.READ_CONTACTS},
+                    REQUEST_CODE_READ_CONTACTS);
+        }
 
         database.getReference().child("Users").addValueEventListener(new ValueEventListener() {
             @Override
@@ -60,7 +96,12 @@ public class ChatsFragment extends Fragment {
                     users.setUserId(dataSnapshot.getKey());
                     if(!users.getUserId().equals(FirebaseAuth.getInstance().getUid()))
                     {
-                        list.add(users);
+                        if(users.getPhone()!=null && checkIfPhoneNumberIsInContacts(users.getPhone()))
+                        {
+                            list.add(users);
+                        }
+
+
                     }
                 }
                 adapter.notifyDataSetChanged();
