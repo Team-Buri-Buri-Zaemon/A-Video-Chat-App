@@ -1,5 +1,6 @@
 package com.example.avideochatapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,7 +14,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.avideochatapp.Models.Users;
+import com.example.avideochatapp.databinding.ActivitySettingsBinding;
+import com.example.avideochatapp.databinding.ActivityVoicecallBinding;
 import com.example.avideochatapp.media.RtcTokenBuilder2;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import io.agora.rtc2.Constants;
 import io.agora.rtc2.IRtcEngineEventHandler;
@@ -49,6 +59,9 @@ public class voicecall extends AppCompatActivity {
     private TextView infoText;
     private TextView NameText;
     private Button joinLeaveButton;
+
+    ActivityVoicecallBinding binding;
+    FirebaseDatabase database;
 
 
     private static final String[] REQUESTED_PERMISSIONS =
@@ -138,7 +151,10 @@ public class voicecall extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_voicecall);
+        binding = ActivityVoicecallBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        database = FirebaseDatabase.getInstance();
+
 
         Bundle extras = getIntent().getExtras();
         String value1 = null;
@@ -188,6 +204,23 @@ public class voicecall extends AppCompatActivity {
         infoText = findViewById(R.id.infoText);
         NameText = findViewById(R.id.Nametext);
         joinChannel();
+
+        database.getReference().child("Users").child(receiverId)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Users users = snapshot.getValue(Users.class);
+                        Picasso.get()
+                                .load(users.getProfilepic())
+                                .placeholder(R.drawable.avatar)
+                                .into(binding.userImage);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
         runOnUiThread(()->NameText.setText(userName));
     }
