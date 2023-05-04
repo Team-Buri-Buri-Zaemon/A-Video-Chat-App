@@ -59,10 +59,12 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String status = binding.etStatus.getText().toString();
                 String username = binding.etUserName.getText().toString();
+                String phone = binding.etPhone.getText().toString();
 
                 HashMap<String, Object> obj = new HashMap<>();
                 obj.put("userName",username);
                 obj.put("status",status);
+                obj.put("phone",phone);
 
                 database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
                         .updateChildren(obj);
@@ -83,6 +85,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                                 binding.etStatus.setText(users.getStatus());
                                 binding.etUserName.setText(users.getUserName());
+                                binding.etPhone.setText(users.getPhone());
                             }
 
                             @Override
