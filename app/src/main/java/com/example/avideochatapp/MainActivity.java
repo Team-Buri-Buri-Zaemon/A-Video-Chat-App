@@ -50,7 +50,9 @@ public class MainActivity extends AppCompatActivity {
 
         int id  = item.getItemId();
         if(id == R.id.settings) {
-            Toast.makeText(this, "Settings Clicked", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this,SettingsActivity.class);
+
+            startActivity(intent);
         }
         else if(id == R.id.logout){
             auth.signOut();

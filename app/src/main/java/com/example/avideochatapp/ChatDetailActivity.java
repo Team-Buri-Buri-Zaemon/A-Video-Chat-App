@@ -56,6 +56,18 @@ public class ChatDetailActivity extends AppCompatActivity {
         binding.userName.setText(userName);
         Picasso.get().load(profilePic).placeholder(R.drawable.avatar).into(binding.profileImage);
 
+        binding.voiceCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ChatDetailActivity.this,MainActivity.class);
+                //used to send extra data to next activity check usersAdapter
+//                intent.putExtra("userId",users.getUserId());
+//                intent.putExtra("profilePic",users.getProfilepic());
+//                intent.putExtra("userName",users.getUserName());
+                startActivity(intent);
+            }
+        });
+
         binding.videoCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,6 +109,7 @@ public class ChatDetailActivity extends AppCompatActivity {
                                         {
                                             MessageModel model = snapshot1.getValue(MessageModel.class);
 
+                                            model.setMessageId(snapshot1.getKey());
                                             messageModels.add(model);
                                         }
                                         chatAdapter.notifyDataSetChanged();

@@ -1,9 +1,9 @@
 package com.example.avideochatapp.Models;
 
 public class Users {
-    String profilepic, userName, phone, mail, password, userId, lastMessage;
+    String profilepic, userName, phone, mail, password, userId, lastMessage,status;
 
-    public Users(String profilepic, String userName, String phone, String mail, String password, String userId, String lastMessage) {
+    public Users(String profilepic, String userName, String phone, String mail, String password, String userId, String lastMessage, String status) {
         this.profilepic = profilepic;
         this.userName = userName;
         this.phone = phone;
@@ -11,6 +11,7 @@ public class Users {
         this.password = password;
         this.userId = userId;
         this.lastMessage = lastMessage;
+        this.status = status;
     }
 
     public String getUserId() {
@@ -32,8 +33,13 @@ public class Users {
         this.password = password;
     }
 
+    public String getStatus() {
+        return status;
+    }
 
-
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getProfilepic() {
         return profilepic;
