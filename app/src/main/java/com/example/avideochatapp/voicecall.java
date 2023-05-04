@@ -2,6 +2,7 @@ package com.example.avideochatapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -33,11 +34,9 @@ public class voicecall extends AppCompatActivity {
     private String token = "";
     int expirationTimeInSeconds = 3600;
     // An integer that identifies the local user.
-    // Sender
     String senderId =" ";
-    //
-//    //receiver
     String receiverId = null;
+    String userName;
 
     //val to pass
     int sendval=0, receiveval=0, channelval=0;
@@ -48,6 +47,7 @@ public class voicecall extends AppCompatActivity {
     private RtcEngine agoraEngine;
     // UI elements
     private TextView infoText;
+    private TextView NameText;
     private Button joinLeaveButton;
 
 
@@ -127,13 +127,12 @@ public class voicecall extends AppCompatActivity {
 
 
     public void joinLeaveChannel(View view) {
-        if (isJoined) {
             agoraEngine.leaveChannel();
             joinLeaveButton.setText("Join");
-        } else {
-            joinChannel();
-            joinLeaveButton.setText("Leave");
-        }
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+
+
     }
 
     @Override
@@ -153,6 +152,12 @@ public class voicecall extends AppCompatActivity {
             value2 = extras.getString("receiverId");
         }
         receiverId=value2;
+
+        String value3 = null;
+        if (extras != null) {
+            value3 = extras.getString("userName");
+        }
+        userName=value3;
 
         for(int i = 0; i < senderId.length(); i++){
             sendval+=(int)senderId.charAt(i);
@@ -179,7 +184,12 @@ public class voicecall extends AppCompatActivity {
 
         // Set up access to the UI elements
         joinLeaveButton = findViewById(R.id.joinLeaveButton);
+
         infoText = findViewById(R.id.infoText);
+        NameText = findViewById(R.id.Nametext);
+        joinChannel();
+
+        runOnUiThread(()->NameText.setText(userName));
     }
 
     protected void onDestroy() {
