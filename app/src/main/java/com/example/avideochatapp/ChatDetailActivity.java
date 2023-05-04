@@ -59,11 +59,12 @@ public class ChatDetailActivity extends AppCompatActivity {
         binding.voiceCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ChatDetailActivity.this,MainActivity.class);
-                //used to send extra data to next activity check usersAdapter
-//                intent.putExtra("userId",users.getUserId());
+                Intent intent = new Intent(ChatDetailActivity.this, voicecall.class);
+//                used to send extra data to next activity check usersAdapter
+                intent.putExtra("userId",senderId);
 //                intent.putExtra("profilePic",users.getProfilepic());
-//                intent.putExtra("userName",users.getUserName());
+                intent.putExtra("receiverId", receiverId);
+
                 startActivity(intent);
             }
         });
