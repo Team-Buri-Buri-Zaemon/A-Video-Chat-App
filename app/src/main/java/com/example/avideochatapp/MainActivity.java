@@ -65,6 +65,14 @@ public class MainActivity extends AppCompatActivity {
 
             startActivity(intent);
         }
+        else if(id == R.id.calls)
+        {
+            Intent intent = new Intent(MainActivity.this,ToDoList.class);
+
+
+            startActivity(intent);
+        }
+
         return true;
     }
 }

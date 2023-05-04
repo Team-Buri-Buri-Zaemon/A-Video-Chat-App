@@ -10,7 +10,12 @@
         android:title="Group Chat"
         />
     <item
+        android:id="@+id/calls"
+        android:title="TodoList"
+        />
+    <item
         android:id="@+id/logout"
         android:title="@string/logout"
         />
+
 </menu>
