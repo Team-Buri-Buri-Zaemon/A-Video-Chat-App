@@ -27,6 +27,9 @@
         android:theme="@style/Theme.AVideoChatApp"
         tools:targetApi="31">
         <activity
+            android:name=".emailVerifyActivity"
+            android:exported="false" />
+        <activity
             android:name=".voicecall"
             android:exported="false" />
         <activity
