@@ -10,26 +10,52 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
         <TextView
             android:id="@+id/infoText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="494dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginTop="10dp"
+            android:textAlignment="center"
             android:layout_marginBottom="10dp"
-            android:layout_alignParentTop="true"
             android:text="Press the button to join a channel" />
+
+        <TextView
+            android:id="@+id/Nametext"
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="310dp"
+            android:textAlignment="center"
+            android:textFontWeight="800"
+            android:textSize="80px"
+            android:textAllCaps="true"
+            android:textColor="@color/purple_700"
+            android:layout_marginEnd="100dp"
+            android:layout_marginBottom="10dp"
+            android:text="Name" />
+
+        <ImageView
+            android:id="@+id/userImage"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="108dp"
+            android:layout_marginEnd="100dp"
+            android:layout_marginTop="100dp"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/darker_gray"/>
 
         <Button
             android:id="@+id/joinLeaveButton"
-            android:layout_width="match_parent"
+            android:layout_width="153dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/infoText"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="140dp"
+            android:layout_marginEnd="140dp"
+            android:layout_marginTop="400dp"
             android:onClick="joinLeaveChannel"
-            android:text="Join" />
+            android:text="Leave" />
 
     </RelativeLayout>
 </ScrollView>

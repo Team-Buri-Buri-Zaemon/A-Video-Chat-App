@@ -23,6 +23,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.Date;
 
+
 public class ChatDetailActivity extends AppCompatActivity {
 
     ActivityChatDetailBinding binding;
@@ -62,6 +63,7 @@ public class ChatDetailActivity extends AppCompatActivity {
                 Intent intent = new Intent(ChatDetailActivity.this, voicecall.class);
 //                used to send extra data to next activity check usersAdapter
                 intent.putExtra("userId",senderId);
+                intent.putExtra("userName", userName);
 //                intent.putExtra("profilePic",users.getProfilepic());
                 intent.putExtra("receiverId", receiverId);
 

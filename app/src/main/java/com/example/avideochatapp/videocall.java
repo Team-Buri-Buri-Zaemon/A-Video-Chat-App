@@ -229,5 +229,31 @@ public class videocall extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, REQUESTED_PERMISSIONS, PERMISSION_REQ_ID);
         }
         setupVideoSDKEngine();
+
+        // Join Channel
+        if (checkSelfPermission()) {
+
+
+            ChannelMediaOptions options = new ChannelMediaOptions();
+
+            // For a Video call, set the channel profile as COMMUNICATION.
+            options.channelProfile = Constants.CHANNEL_PROFILE_COMMUNICATION;
+            // Set the client role as BROADCASTER or AUDIENCE according to the scenario.
+            options.clientRoleType = Constants.CLIENT_ROLE_BROADCASTER;
+            // Display LocalSurfaceView.
+            setupLocalVideo();
+            localSurfaceView.setVisibility(View.VISIBLE);
+            // Start local preview.
+            agoraEngine.startPreview();
+            // Join the channel with a temp token.
+            // You need to specify the user ID yourself, and ensure that it is unique in the channel.
+            agoraEngine.joinChannel(token, channelName,  sendval, options);
+
+
+
+
+        } else {
+            Toast.makeText(getApplicationContext(), "Permissions was not granted", Toast.LENGTH_SHORT).show();
+        }
     }
 }
