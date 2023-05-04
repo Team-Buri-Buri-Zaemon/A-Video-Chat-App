@@ -67,7 +67,7 @@ public class SignInActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful())
                                 {
-                                    Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                                    Intent intent = new Intent(SignInActivity.this, emailVerifyActivity.class);
                                     startActivity(intent);
 
                                 }
@@ -139,7 +139,7 @@ public class SignInActivity extends AppCompatActivity {
 
                             FirebaseUser user = auth.getCurrentUser();
 
-                            Users users  = new Users();
+                            Users users = new Users();
                             users.setUserId(user.getUid());
                             users.setUserName(user.getDisplayName());
                             users.setProfilepic(user.getPhotoUrl().toString());
@@ -158,8 +158,8 @@ public class SignInActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("TAG", "signInWithCredential:failure", task.getException());
-                            Toast.makeText(SignInActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                            Snackbar.make(binding.getRoot(),"Authentication failed.",Snackbar.LENGTH_SHORT).show();
+                            Toast.makeText(SignInActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Snackbar.make(binding.getRoot(), "Authentication failed.", Snackbar.LENGTH_SHORT).show();
                         }
                     }
                 });
