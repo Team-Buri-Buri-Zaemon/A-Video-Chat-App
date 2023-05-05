@@ -16,6 +16,7 @@ import android.content.pm.PackageManager;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -46,6 +47,8 @@ public class videocall extends AppCompatActivity {
     private SurfaceView localSurfaceView;
     private SurfaceView remoteSurfaceView;
 
+    private ImageView mSwitchCamera, mMuteBtn;
+    private boolean isMuted = false;
     private static final int PERMISSION_REQ_ID = 22;
     private static final String[] REQUESTED_PERMISSIONS =
             {
@@ -182,7 +185,16 @@ public class videocall extends AppCompatActivity {
         }).start();
     }
 
+    public void onSwitchCameraClicked(View view) {
+        agoraEngine.switchCamera();
+    }
 
+    public void onLocalAudioMuteClicked(View view) {
+        isMuted = !isMuted;
+        agoraEngine.muteLocalAudioStream(isMuted);
+        int res = isMuted ? R.drawable.btn_mute : R.drawable.btn_unmute;
+        mMuteBtn.setImageResource(res);
+    }
 
 
 
@@ -249,8 +261,8 @@ public class videocall extends AppCompatActivity {
             // You need to specify the user ID yourself, and ensure that it is unique in the channel.
             agoraEngine.joinChannel(token, channelName,  sendval, options);
 
-
-
+            mSwitchCamera = findViewById(R.id.switch_camera_btn);
+            mMuteBtn = findViewById(R.id.audio_mute_audio_unmute_btn);
 
         } else {
             Toast.makeText(getApplicationContext(), "Permissions was not granted", Toast.LENGTH_SHORT).show();

@@ -31,10 +31,43 @@
             android:id="@+id/LeaveButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/remote_video_view_container"
-            android:layout_alignStart="@id/remote_video_view_container"
+            android:layout_below="@+id/switch_camera_btn"
+            android:layout_alignStart="@+id/switch_camera_btn"
             android:layout_marginTop="40dp"
             android:onClick="leaveChannel"
             android:text="End Call" />
+
+<!--        <imageView-->
+<!--            android:id="@+id/switch_camera_btn"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_below="@+id/LeaveButton"-->
+<!--            android:layout_alignStart="@+id/LeaveButton"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:onClick="onSwitchCameraClicked"-->
+<!--            android:text="Switch Cam" />-->
+            <ImageView
+                android:id="@+id/switch_camera_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/remote_video_view_container"
+                android:layout_alignStart="@+id/remote_video_view_container"
+                android:src="@drawable/btn_switch_camera"
+                android:layout_marginTop="20dp"
+                android:onClick="onSwitchCameraClicked"
+                />
+
+        <ImageView
+            android:id="@+id/audio_mute_audio_unmute_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/remote_video_view_container"
+            android:layout_toRightOf="@id/switch_camera_btn"
+            android:layout_marginLeft="10dp"
+
+            android:layout_marginTop="20dp"
+            android:onClick="onLocalAudioMuteClicked"
+            android:src="@drawable/btn_unmute"
+            android:scaleType="centerCrop"/>
     </RelativeLayout>
 </ScrollView>
