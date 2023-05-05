@@ -51,7 +51,7 @@ public class ChatDetailActivity extends AppCompatActivity {
         String receiverId = getIntent().getStringExtra("userId");
         String userName = getIntent().getStringExtra("userName");
         String profilePic = getIntent().getStringExtra("profilePic");
-        Toast.makeText(ChatDetailActivity.this, sUserName + " " + userName, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(ChatDetailActivity.this, sUserName + " " + userName, Toast.LENGTH_SHORT).show();
 
 
         binding.userName.setText(userName);
